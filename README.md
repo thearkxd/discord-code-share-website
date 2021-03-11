@@ -15,8 +15,6 @@
 <img src="https://cdn.discordapp.com/attachments/806816221471047721/807732507311079424/unknown.png">
 <img src="https://cdn.discordapp.com/attachments/806816221471047721/807732535177379850/unknown.png">
 <img src="https://cdn.discordapp.com/attachments/806816221471047721/807732591096234004/unknown.png">
-<img src="">
-<img src="">
 
 # İletişim
 * [Discord Sunucum](https://discord.gg/UEPcFtytcc)
