@@ -1,0 +1,88 @@
+.team {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.team-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.team-cards div {
+  position: relative;
+  width: 300px;
+  height: 75px;
+  font-size: 2em;
+  text-align: center;
+  float: left;
+  margin: 30px;
+  transition: 300ms all;
+  border-radius: 10px;
+}
+
+.team-cards span {
+  border-radius: 10px;
+  position: absolute;
+  height: 13px;
+  width: 13px;
+  top: 55px;
+  right: 18px;
+  border: 2px solid rgb(17, 17, 17);
+}
+
+body.light .team-cards span {
+  border: 2px solid rgb(241, 241, 241);
+}
+
+.team-cards span.online {
+  background-color: limegreen;
+}
+
+.team-cards span.dnd {
+  background-color: red;
+}
+
+.team-cards span.idle {
+  background-color: yellow;
+}
+
+.team-cards span.offline {
+  background-color: gray;
+}
+
+.team-cards div:hover {
+  box-shadow: 23px 23px 40px 0px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+
+.team-cards h5 {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  text-align: center;
+  font-size: 0.6em;
+}
+
+.team-cards h6 {
+  position: absolute;
+  left: 20px;
+  top: 45px;
+  text-align: center;
+  font-size: 0.4em;
+  color: rgb(170, 170, 170);
+}
+
+.team-cards img {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border-radius: 30px;
+  width: 50px;
+  height: 50px;
+}

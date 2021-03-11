@@ -1,0 +1,34 @@
+
+body.light .navbar-brand {
+  color: #000000 !important;
+}
+
+body.light .nav-item a {
+  color: #454545 !important;
+}
+
+body.light .nav-item a:hover {
+  color: #000000 !important;
+}
+
+.dropdown-item {
+  color: #C3D7DE !important;
+}
+
+.dropdown-item:hover {
+  background-color: #16181b !important;
+}
+
+body.light .dropdown-item:hover {
+  background-color: #fff !important;
+}
+
+  .navbar .nav-item .dropdown-menu {
+    display: none;
+  }
+  .navbar .nav-item:hover .dropdown-menu {
+    display: block;
+  }
+  .navbar .nav-item .dropdown-menu {
+    margin-top: 0;
+  }

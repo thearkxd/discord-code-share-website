@@ -1,0 +1,56 @@
+<html>
+  <body>
+    <%- include('partials/_header'); -%>
+    <%- include('partials/_loader'); -%>
+    <div class="container" style="min-height: 100vh; text-align: center;">
+      <h2 class="text-center" style="margin-top: 100px;">
+        <img src="<%= member.user.avatarURL({ dynamic: true }) %>" style="border-radius: 100%; width: 100px; height: 100px;">
+        <br><br>
+        <%= member.user.tag %>
+      </h2>
+      <h5 style="color: <%= color %>">
+        <%= auth %>
+      </h5>
+      <br><br>
+      <div class="row row-cols-1 row-cols-md-3">
+      <h4>
+        Paylaştığı kod sayısı:<br><%= data.codes ? data.codes.length : 0 %>
+      </h4>
+      <h4>
+        Aldığı beğeni sayısı:<br><%= data.getLikeCount ? data.getLikeCount : 0 %>
+      </h4>
+      <h4>
+        Beğendiği kod sayısı:<br><%= code ? code.filter(x => x.likedUsers.includes(member.user.id)).length : 0 %>
+      </h4>
+      </div>
+      <br><br>
+      <% if (data.codes) { %>
+      <h3>
+        Paylaştığı kodlar:<br>
+        <% data.codes.sort((a, b) => b.date - a.date).map(x => { %>
+        <a href="/<%= x.rank %>/<%= x.id %>" style="text-decoration: none; font-size: 23px;"><%= x.name %></a>
+        <% }); %>
+      </h3>
+      <% } %>
+      <% if (user && user.id === member.user.id && code.filter(x => x.likedUsers.includes(member.user.id)).length > 0) { %>
+      <h3>
+        Beğendiği kodlar:<br>
+        <% code.filter(x => x.likedUsers.includes(member.user.id)).map(x => { %>
+        <a href="/<%= x.rank %>/<%= x.id %>" style="text-decoration: none; font-size: 23px;"><%= x.name %></a>
+        <% }); %>
+      </h3>
+      <% } %>
+    </div>
+
+    <script>
+      if (localStorage.getItem("mode") != "") {
+        document.body.classList.add(localStorage.getItem("mode"));
+        document.getElementById("mode-btn").checked = true;
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/index.js"></script>
+    <%- include('partials/_footer'); -%>
+  </body>
+</html>

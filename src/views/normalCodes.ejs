@@ -1,0 +1,68 @@
+<html>
+  <body>
+    <%- include('partials/_header'); -%>
+    <%- include('partials/_loader'); -%>
+    <div class="container" style="min-height: 100vh;">
+      <h1 class="text-center" style="margin-top: 100px;">
+        Normal Kodlar
+      </h1>
+      <h5 class="text-center">
+        Kodlara bakmadan önce <a href="/information">Bilgilendirme</a> kısmını okumayı unutmayın!
+      </h5>
+      <hr>
+
+      <div class="container">
+        <input id="search" type="text" class="form-control" placeholder="Kod ara" style="background: none; color: white;">
+      </div><br>
+
+      <center>
+        <div style="margin-left: 0.1rem; margin-right: 0.1rem;" class="row row-cols-1 row-cols-md-4">
+          <% data.forEach(x => { %>
+          <div class="col mb-1">
+            <div class="card bg-transparent mb-3" style="max-width: 18rem;">
+              <div class="card-header">
+                <% if(x.bug) { %>
+                <span class="fas fa-exclamation-triangle" style="color:#FF3C41; position: absolute; top: 10px; right: 10px;"></span>
+                <% } %>
+                <center>
+                  <img src="<%= guild.members.cache.get(x.sharers[0]).user.avatarURL({ dynamic: true }) %>" style="border-radius: 100%; max-width: 100%; height: 3.5rem;">
+                </center>
+                <b><center><%= guild.members.cache.get(x.sharers[0]).user.username %></center></b>
+              </div>
+              <div class="card-body">
+                <p class="card-text avatar"><%= x.name %></p>
+                <p class="card-text avatar"><%= x.desc %></p>
+                <p class="card-text"><%= moment(x.date).add(3, "hours").format("LLL") %></p>
+                <a class="button1 nav-link" style="width: 100%; filter: invert(1);" href="/normal/<%= x.id %>"><b>Kodu İncele</b></a>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+        </center>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("#search").keyup(function(){
+        var value = $(this).val().toLowerCase();
+        $(".card, .mb-3").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>
+
+    <script>
+      if (localStorage.getItem("mode") != "") {
+        document.body.classList.add(localStorage.getItem("mode"));
+        document.getElementById("mode-btn").checked = true;
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/index.js"></script>
+    <%- include('partials/_footer'); -%>
+  </body>
+</html>

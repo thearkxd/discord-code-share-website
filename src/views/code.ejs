@@ -1,0 +1,71 @@
+<html>
+  <body>
+    <%- include('partials/_header'); -%>
+    <%- include('partials/_loader'); -%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs-okaidia-theme@0.0.1/prism-okaidia.css">
+    <div class="container" style="min-height: 100vh; text-align: center;">
+      <h2 style="margin-top: 100px;"><%= data.name %></h2>
+      <br>
+      <h5 style="color: gray;"><%= data.desc %></h5>
+      <br>
+      <h5>Modüller: <kbd><%= data.modules %></kbd></h5>
+      <br><br>
+      <h5>
+        <% data.sharers.map(s => { %>
+        <a href="/profile/<%= s %>" style="text-decoration: none; margin: 0 10px;">
+        <img src="<%= guild.members.cache.get(s).user.avatarURL({ dynamic: true }) %>" style="border-radius: 100%; width: 50px; height: 50px;">
+        <%= guild.members.cache.get(s).user.username %>
+        </a>
+        <% }); %>
+      </h5>
+      <br>
+      <% if (!data.bug) { %>
+      <a href="/bug/<%= data.id %>"><span class="fas fa-exclamation-triangle" style="color:#FF3C41; float:right; margin-left: 20px; cursor: pointer;"></span></a>
+      <% } else { %>
+      <h6><span style="color: red;">Dikkat:</span> Bu kodda hata bildirimiştir! Yetkililerimiz en kısa sürede ilgileneceklerdir.</h6>
+      <% } %>
+      <a href="javascript:$('#likeForm').submit()" id="likeButton">
+        <span id="like" style="color:#FF3C41; float:right" class="<%= data.likedUsers.includes(user.id) ? 'fas fa-heart' : 'far fa-heart' %>">
+          <span id="likeText"><%= data.likedUsers ? data.likedUsers.length : 0 %></span>
+        </span>
+      </a> 
+      <% if (data.mainCode) { %>
+      <h2 style="text-align: left;">Main Kodu: <a onclick="copy('mainIcon')"><i class="far fa-copy" id="mainIcon"></i></a></h2>
+      <pre style="height: 40pc; overflow-y: scroll"><code class="language-js" id="main"><%= data.mainCode %></code></pre>
+      <br>
+      <% } %>
+      <% if (data.command) { %>
+      <h2 style="text-align: left;">Komut: <a onclick="copy('commandIcon')"><i class="far fa-copy" id="commandIcon"></i></a></h2>
+      <pre style="height: 40pc; overflow-y: scroll"><code class="language-js" id="command"><%= data.command %></code></pre>
+      <% } %>
+      <% if (data.sharers.includes(user.id) || reqMember.hasPermission(8)) { %>
+      <a href="/edit/<%= data.rank %>/<%= data.id %>" class="btn btn-outline-warning" style="width: 100%;">Kodu düzenle</a>
+      <br><br>
+      <a href="/delete/<%= data.rank %>/<%= data.id %>" class="btn btn-outline-danger" style="width: 100%;">Kodu sil</a>
+      <% } %>
+      <form id="likeForm" action="/like" method="POST">
+        <input name="id" id="likeName" type="hidden" value="<%= data.id %>">
+      </form>
+    </div>
+
+    <script>
+      if (localStorage.getItem("mode") != "") {
+        document.body.classList.add(localStorage.getItem("mode"));
+        document.getElementById("mode-btn").checked = true;
+      }
+      
+      const copy = (icon) => {
+        const btn = document.getElementById(icon);
+        btn.style.color = "green";
+        setTimeout(() => btn.style.color = "#b8b8b8", 1000);
+        icon = icon.replace("Icon", "");
+        copyText(document.getElementById(icon).textContent)
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+    <script src="/index.js"></script>
+    <%- include('partials/_footer'); -%>
+  </body>
+</html>

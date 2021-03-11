@@ -1,0 +1,99 @@
+<html>
+  <head>    
+  <%- include('partials/_header'); -%>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
+  </head>
+
+  <body>
+    <%- include('partials/_loader'); -%>
+    <section class="a">
+      <div class="content">
+        <div class="orta">
+          <div class="lang"></div>
+          <img src="<%= icon %>" class="avatar" />
+          <h2>Description Technique</h2>
+        </div>
+        <a href="/information" target="_blank" class="button1" onclick="yazıdeğiş()" id="buton">Bilgilendirme</a>
+        <a href="/discord" target="_blank" class="button1" onclick="yazıdeğiş2()" id="buton2">Sunucumuz</a>
+        <div class="toggle">
+          <label class="mode-control">
+            <input id="mode-btn" type="checkbox" />
+            <span
+              ><i class="fas fa-sun" style="width: 25px; height: 25px"></i
+            ></span>
+            <span
+              ><i class="fas fa-moon" style="width: 25px; height: 25px"></i
+            ></span>
+          </label>
+        </div>
+
+        <script>
+          document.getElementById("mode-btn").addEventListener("click", () => {
+            document.body.classList.toggle("light");
+            localStorage.setItem("mode", document.body.classList);
+          });
+
+          if (localStorage.getItem("mode") != "") {
+            document.body.classList.add(localStorage.getItem("mode"));
+            document.getElementById("mode-btn").checked = true;
+          }
+        </script>
+
+        <a href="#about">
+          <div class="scroll-down"></div>
+        </a>
+      </div>
+    </section>
+    <p class="totop"><a id="top"><i class="fas fa-chevron-circle-up" style="width: 30px; height: 30px"></i></a></p>
+    <div class="about" id="about">
+      <h1>Hakkımızda</h1>
+      <br>
+      <h5>
+        Description Technique, insanlara bot kodlamayı öğretmeyi ve bot geliştiricilerinin birbirleriyle yardımlaşmasını sağlamayı amaçlayan bir Discord sunucusudur.
+        Aynı zamanda sizden hiçbir şey talep etmeden ücretsiz kod paylaşımları yapmaktadır.
+        Aktif yetkili kadrosu ile sizlere en iyi şekilde yardımcı olmaya çalışmaktadır.
+      </h5>
+    </div>
+
+    <div class="team" id="staffs">
+      <h1>Yetkililerimiz</h1>
+      <br>
+      <div class="team-cards">
+        <% owners.forEach(x => { %>
+        <div class="<%= x.user.username %>" onclick="window.open('https://discordapp.com/users/<%= x.user.id %>')">
+            <h5 style="font-family: sans-serif; font-weight: normal">
+              <%= x.user.username %>
+            </h5>
+            <h6 style="color: #f8a5a5">Owner</h6>
+            <img src="<%= x.user.avatarURL({ dynamic: true, size: 2048 }) %>" />
+            <span class="<%= x.user.presence.status %>"></span>
+          </div>
+        <% }); %>
+        <% admins.forEach(x => { %>
+        <div class="<%= x.user.username %>" onclick="window.open('https://discordapp.com/users/<%= x.user.id %>')">
+            <h5 style="font-family: sans-serif; font-weight: normal">
+              <%= x.user.username %>
+            </h5>
+            <h6 style="color: #caaafd">Admin</h6>
+            <img src="<%= x.user.avatarURL({ dynamic: true, size: 2048 }) %>" />
+            <span class="<%= x.user.presence.status %>"></span>
+          </div>
+        <% }); %>
+        <% codeSharers.forEach(x => { %>
+        <div class="<%= x.user.username %>" onclick="window.open('https://discordapp.com/users/<%= x.user.id %>')">
+            <h5 style="font-family: sans-serif; font-weight: normal">
+              <%= x.user.username %>
+            </h5>
+            <h6 style="color: #f3b7ff">Code Sharer</h6>
+            <img src="<%= x.user.avatarURL({ dynamic: true, size: 2048 }) %>" />
+            <span class="<%= x.user.presence.status %>"></span>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/index.js"></script>
+    <%- include('partials/_footer'); -%>
+  </body>
+</html>
