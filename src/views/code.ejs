@@ -11,10 +11,11 @@
       <h5>Modüller: <kbd><%= data.modules %></kbd></h5>
       <br><br>
       <h5>
-        <% data.sharers.map(s => { %>
+        <% data.sharers.map(s => {
+          %>
         <a href="/profile/<%= s %>" style="text-decoration: none; margin: 0 10px;">
-        <img src="<%= guild.members.cache.get(s).user.avatarURL({ dynamic: true }) %>" style="border-radius: 100%; width: 50px; height: 50px;">
-        <%= guild.members.cache.get(s).user.username %>
+          <% if(guild.members.cache.get(s)) { %> <img src="<%= guild.members.cache.get(s).user.displayAvatarURL({ dynamic: true }) %>" style="border-radius: 100%; width: 50px; height: 50px;"><%}%>
+        <% if(guild.members.cache.get(s)) { %> <%= guild.members.cache.get(s).user.username %> <%} else {%> Paylaşan kişi bilinmiyor <%}%>
         </a>
         <% }); %>
       </h5>
