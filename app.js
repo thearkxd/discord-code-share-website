@@ -76,7 +76,7 @@ app.get("/", async (req, res) => {
   const guild = client.guilds.cache.get(conf.guildID);
   const owners = guild.members.cache.filter(x => x.roles.cache.has(conf.ownerRole));
   const admins = guild.members.cache.filter(x => x.roles.cache.has(conf.adminRole) && !owners.find(b => x.user.id == b));
-  const codeSharers = guild.members.cache.filter(x => x.roles.cache.has(conf.codeSharer) && !owners.find(b => x.user.id == b) && !supervisors.find(b => x.user.id == b) && !admins.find(b => x.user.id == b) && !headMods.find(b => x.user.id == b) && !mods.find(b => x.user.id == b) && !trialMods.find(b => x.user.id == b));
+  const codeSharers = guild.members.cache.filter(x => x.roles.cache.has(conf.codeSharer) && !owners.find(b => x.user.id == b) && !admins.find(b => x.user.id == b));
   res.render("index", {
     user: req.user,
     icon: guild.iconURL({ dynamic: true }),
