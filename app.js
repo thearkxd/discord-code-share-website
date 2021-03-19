@@ -198,7 +198,7 @@ app.get("/share", async (req, res) => {
   res.render("shareCode", {
     user: req.user,
     icon: client.guilds.cache.get(conf.guildID).iconURL({ dynamic: true }),
-    isStaff: client.guilds.cache.get(conf.guildID).members.cache.get(req.user.id).roles.cache.has("783442672496803891"),
+    isStaff: client.guilds.cache.get(conf.guildID).members.cache.get(req.user.id).roles.cache.has(conf.codeSharer),
     reqMember: req.user ? client.guilds.cache.get(conf.guildID).members.cache.get(req.user.id) : null
   });
 });
@@ -250,7 +250,7 @@ app.post("/sharing", async (req, res) => {
     date: code.date
   }).save();
   
-  const channel = client.channels.cache.get(conf.codeLog);
+  const channel = guild.channels.cache.get(conf.codeLog);
   let color;
   if (code.rank === "normal") color = "#bfe1ff";
   else if (code.rank === "gold") color = "#F1C531";
