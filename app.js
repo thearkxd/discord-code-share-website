@@ -340,7 +340,7 @@ app.get("/normal/:codeID", async (req, res) => {
   if (!req.user || !client.guilds.cache.get(conf.guildID).members.cache.has(req.user.id)) return error(res, 138, "Kodları görebilmek için Discord sunucumuza katılmanız ve siteye giriş yapmanız gerekmektedir.");
   const guild = client.guilds.cache.get(conf.guildID);
   const member = req.user ? guild.members.cache.get(req.user.id) : null;
-  if (member && !member.roles.cache.has(conf.booster) && !member.roles.cache.has(conf.ownerRole) && member.roles.cache.has(conf.adminRole)) return error(res, 501, "Bu kodu görebilmek için gerekli rolleriniz bulunmamaktadır! Lütfen bilgilendirme sayfasını okuyunuz!");
+  if (member && !member.roles.cache.has(conf.booster) && !member.roles.cache.has(conf.ownerRole) && !member.roles.cache.has(conf.adminRole)) return error(res, 501, "Bu kodu görebilmek için gerekli rolleriniz bulunmamaktadır! Lütfen bilgilendirme sayfasını okuyunuz!");
   const codeID = req.params.codeID;
   if (!codeID) return res.redirect("/");
   const codeData = require("./src/schemas/code");
@@ -361,7 +361,7 @@ app.get("/gold/:codeID", async (req, res) => {
   const member = req.user ? guild.members.cache.get(req.user.id) : null;
   const codeID = req.params.codeID;
   if (!codeID) return res.redirect("/");
-  if (member && !member.roles.cache.has(conf.goldRole) && !member.roles.cache.has(conf.booster) && !member.roles.cache.has(conf.ownerRole) && member.roles.cache.has(conf.adminRole)) return error(res, 501, "Bu kodu görebilmek için gerekli rolleriniz bulunmamaktadır! Lütfen bilgilendirme sayfasını okuyunuz!");
+  if (member && !member.roles.cache.has(conf.goldRole) && !member.roles.cache.has(conf.booster) && !member.roles.cache.has(conf.ownerRole) && !member.roles.cache.has(conf.adminRole)) return error(res, 501, "Bu kodu görebilmek için gerekli rolleriniz bulunmamaktadır! Lütfen bilgilendirme sayfasını okuyunuz!");
   const codeData = require("./src/schemas/code");
   const code = await codeData.findOne({ rank: "gold", id: codeID });
   if (!code) return error(res, 404, codeID+" ID'li bir kod bulunmuyor!");
@@ -380,7 +380,7 @@ app.get("/diamond/:codeID", async (req, res) => {
   const member = req.user ? guild.members.cache.get(req.user.id) : null;
   const codeID = req.params.codeID;
   if (!codeID) return res.redirect("/");
-  if (member && !member.roles.cache.has(conf.diaRole) && !member.roles.cache.has(conf.booster) && !member.roles.cache.has(conf.ownerRole) && member.roles.cache.has(conf.adminRole)) return error(res, 501, "Bu kodu görebilmek için gerekli rolleriniz bulunmamaktadır! Lütfen bilgilendirme sayfasını okuyunuz!");
+  if (member && !member.roles.cache.has(conf.diaRole) && !member.roles.cache.has(conf.booster) && !member.roles.cache.has(conf.ownerRole) && !member.roles.cache.has(conf.adminRole)) return error(res, 501, "Bu kodu görebilmek için gerekli rolleriniz bulunmamaktadır! Lütfen bilgilendirme sayfasını okuyunuz!");
   const codeData = require("./src/schemas/code");
   const code = await codeData.findOne({ rank: "diamond", id: codeID });
   if (!code) return error(res, 404, codeID+" ID'li bir kod bulunmuyor!");
@@ -399,7 +399,7 @@ app.get("/ready/:codeID", async (req, res) => {
   const member = guild.members.cache.get(req.user.id);
   const codeID = req.params.codeID;
   if (!codeID) return res.redirect("/");
-  if (member && !member.roles.cache.has(conf.readySystemsRole) && !member.roles.cache.has(conf.booster) && !member.roles.cache.has(conf.ownerRole) && member.roles.cache.has(conf.adminRole)) return error(res, 501, "Bu kodu görebilmek için gerekli rolleriniz bulunmamaktadır! Lütfen bilgilendirme sayfasını okuyunuz!");
+  if (member && !member.roles.cache.has(conf.readySystemsRole) && !member.roles.cache.has(conf.booster) && !member.roles.cache.has(conf.ownerRole) && !member.roles.cache.has(conf.adminRole)) return error(res, 501, "Bu kodu görebilmek için gerekli rolleriniz bulunmamaktadır! Lütfen bilgilendirme sayfasını okuyunuz!");
   const codeData = require("./src/schemas/code");
   const code = await codeData.findOne({ rank: "ready", id: codeID });
   if (!code) return error(res, 404, codeID+" ID'li bir kod bulunmuyor!");
